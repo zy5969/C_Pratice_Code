@@ -102,7 +102,7 @@ int search(Double *tree, char *str){
     for(int i = 0; str[i]; i++){
         //判断对应子节点父亲是否为其本身，
         //tree[p].base + (str[i] - 'a')子节点下标
-        if(abs(tree[tree[p].base + (str[i] - 'a')].check) != p) return 1;
+        if(abs(tree[tree[p].base + (str[i] - 'a')].check) != p) return 0;
         	//p的值更新节点下标
         p = tree[p].base + str[i] - 'a';
     }
@@ -124,12 +124,16 @@ int main() {
     int cnt = transdouble(root, 1, arr);
     int size1 = nodecnt * sizeof(Node);
     int size2 = cnt * sizeof(Double);
-    printf("tree space : %d bit\n", size1);
-    printf("double tree space: %d bit\n", size2);
-    printf("compress rate :%.2lf%%\n", 100.0 * size2 / size1);
+ //   printf("tree space : %d bit\n", size1);
+ //   printf("double tree space: %d bit\n", size2);
+ //   printf("compress rate :%.2lf%%\n", 100.0 * size2 / size1);
+    printf("----------------------------\n");
+    output(root, 0, str);
+    printf("----------------------------\n");
     while(~scanf("%s", str)){
         printf("result : %d\n", search(arr, str));
     }
     free(arr);
+    clear(root);
     return 0;
 }
