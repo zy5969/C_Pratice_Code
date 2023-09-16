@@ -8,7 +8,7 @@ int main() {
     char w_file[256] = {0};
     scanf("%s%s", filename, w_file);
     FILE *fin = fopen(filename, "rb");//'b',二进制相关
-    FILE fout = fopen(w_file,"wb");  //*"a"在文件中追加另一个文件的内容，”w"覆盖原内容*
+    FILE *fout = fopen(w_file,"wb");  //*"a"在文件中追加另一个文件的内容，”w"覆盖原内容*
     //判断是否打开
     if(fin == NULL) {
         printf("err\n");
