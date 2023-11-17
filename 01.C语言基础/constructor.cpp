@@ -17,15 +17,15 @@
 #include <vector>
 using namespace std;
 
-class A:
-    class mymap : public map < A *, string > {
+class A;
+    class MyMap : public map < A *, string > {
     public:
         void output(A *p, string s) {
             if(find(p) == end()) {
                 cout << "unknown name " << p;
             }
             else {
-                cout << operator[] (p);
+                cout << operator[](p);
             }
             cout << s << endl;
             return;
@@ -42,7 +42,7 @@ public :
         this->x = x;
         this->y = 0;
     }
-    A(const A a) {
+    A(const A& a) {
         name.output(this, " copy constructor");
         this->x = a.x;
         this->y = a.y;
@@ -82,7 +82,7 @@ namespace copy_constructor {
         name[&a] = "a";
         name[&b] = "b";
         name[&c] = "c";
-        cout << "c = a " << nedl;
+        cout << "c = a " << endl;
         c = a;
         cout << "a = " << &a << endl;
         cout << "b = " << &b << endl;
