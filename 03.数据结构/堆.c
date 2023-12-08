@@ -5,7 +5,7 @@
 #define swap(a,b){\
         __typeof(a) __temp = a;\
         a = b; b = __temp;\
-        }
+    }
 
 typedef struct priority{
     int *data;//存储空间
