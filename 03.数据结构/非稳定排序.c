@@ -38,8 +38,51 @@ void quick(int *num, int l, int r){
 }
 
 //希尔
+void shell(int *arr, int n){
+    int step = n / 2;//初始步长
+    int temp;
+    for(step; step > 0; step /= 2){ //递减
+        for(int i = step; i < n; i++){
+            temp = arr[i];//步长位置上的数
+            int j;
+            for(j = i; j >= step && arr[j - step] >  temp; j -= step){
+                swap(arr[j] , arr[j - step]);//步长左边数大，移到右边
+            }
+         //   arr[j] = step;
+        }
+    }
+    return;
+}
+
 
 //堆
+void build(int *arr, int val, int n){
+    int a = n;
+    while(a >> 1 && arr[a] > arr[a >> 1]){
+        swap(arr[a], arr[a >> 1]);
+        a >>= 1;
+    }
+    return ;
+}
+
+void sortnum(int *arr, int n){
+    for(int i = 1; i < n; i++){
+        build(arr, arr[i], i);
+    }
+    for(int i = n - 1; i >= 1; i--){
+        int ind = 1;
+        swap(arr[ind], arr[i]);
+        while((ind << 1) <= (i - 1)) {
+            int temp = ind, a = ind << 1, b = ind << 1 | 1;
+            if(arr[temp] < arr[a]) temp = a;
+            if((b <= i - 1) && arr[b] > arr[temp]) temp = b;
+            if(temp == ind) break;
+            swap(arr[ind], arr[temp]);
+            ind = temp;
+        }
+    }
+    return;
+}
 
 
 int main(){
@@ -48,8 +91,17 @@ int main(){
     for(int i = 0; i < 10; i++){
         arr[i] = rand() % 100;
     }
+    
+    for(int j = 0; j < 10; j++){
+        j && printf(" ");
+        printf("%d", arr[j]);
+    }
+    printf("\n");
+  //  mainshell(arr);
+    shell(arr, 10);
+  //  sortnum(arr, 11);
 //    selet(arr, 10);
-    quick(arr, 0, 9);
+//    quick(arr, 0, 9);
     for(int j = 0; j < 10; j++){
         j && printf(" ");
         printf("%d", arr[j]);
