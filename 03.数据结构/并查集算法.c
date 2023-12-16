@@ -1,4 +1,4 @@
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -108,6 +108,134 @@ int main() {
     }
     clear(q);
     clears(p);
+    return 0;
+}
+
+*/
+//并查集算法，元素联通性
+#include <stdio.h>
+#include <stdlib.h>
+#define swap(a, b) {\
+    __typeof(a) __temp = a;\
+    a = b; b = __temp;\
+}
+
+//quick_find
+typedef struct {
+    int *color;
+    int size;
+}Qfind;
+
+//quick_union
+typedef struct {
+    int *father, *count;
+    int size;
+}Qunion;
+
+Qfind *init(int n){
+    Qfind *q = (Qfind *)malloc(sizeof(Qfind));
+    q->color = (int *)malloc(sizeof(int) * (n + 1));
+    q->size = n;
+    for(int i = 0; i < n; i++){
+        q->color[i] = i;
+    }
+    return q;
+}
+
+Qunion *initunion(int n){
+    Qunion *u = (Qunion *)malloc(sizeof(Qunion));
+    u->father = (int *)malloc(sizeof(int) * (n + 1));
+    u->count = (int *)malloc(sizeof(int) * (n + 1));
+    u->size = n;
+    for(int i = 0; i < n; i++){
+        u->father[i] = i;
+        u->count[i] = 1;
+    }
+    return u;
+}
+
+int find(Qfind *q, int n){
+    return q->color[n];
+}
+
+int funion(Qunion *u, int n){
+    if(u->father[n] == n) return n;
+    return u->father[n] = funion(u, u->father[n]);
+}
+
+//合并
+//quick_find
+int union_find(Qfind *q, int a, int b){
+    if(find(q, a) == find(q, b)) return 0;
+    int x = find(q, a);
+    for(int i = 0; i < q->size; i++){
+        if(q->color[i] != x) continue;
+        q->color[i] = q->color[b];
+    }
+    return 1;
+}
+
+//quick_union
+int union_quick(Qunion *u, int n, int m){
+    int fn = funion(u, n), fm = funion(u, m);
+    if(fn == fm) return 0;
+    if(u->count[n] < u->count[m]) swap(fn, fm);
+    u->father[m] = fn;
+    u->count[n] += u->count[m];
+    return 0;
+}
+
+//清空
+void clearfind(Qfind *q){
+    if(q == NULL) return ;
+    free(q->color);
+    free(q);
+    return ;
+}
+
+void clearunion(Qunion *u){
+    if(u == NULL) return ;
+    free(u->father);
+    free(u->count);
+    free(u);
+    return ;
+}
+
+//输出
+void output(Qfind *q, Qunion *u, int n){
+    printf("------quick_find----\n");
+    for(int i = 0; i < n; i++){
+        printf("%d: color = %d\n", i, q->color[i]);
+    }
+    printf("------quick_union----\n");
+    for(int j = 0; j < n; j++){
+        printf("%d:father = %d  root = %d\n", j, u->father[j], funion(u, j));
+    }
+    printf("--------------------------\n");
+    return ;
+}
+
+int main() {
+    int a, b, n, m;
+    scanf("%d", &m);
+    Qfind *q = init(m);
+    Qunion *u = initunion(m);
+    output(q, u, m);
+    while(~scanf("%d%d%d", &n, &a, &b)){
+        switch(n) {
+            case 1: union_find(q, a, b); union_quick(u, a, b); output(q, u, m); break;
+            case 2: {
+                if(q->color[a] == q->color[b]) printf("YES!\n");
+                else printf("NO!\n");
+                if(funion(u, a) == funion(u, b)) printf("YES!!\n");
+                else printf("NO!!\n");
+            }break;
+            default: printf("error!\n"); break;
+        }
+        
+    }
+    clearfind(q);
+    clearunion(u);
     return 0;
 }
 
