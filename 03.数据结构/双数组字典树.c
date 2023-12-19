@@ -66,8 +66,9 @@ void baseval(Node *root, Tree *q, int ind) {
         flag = 1;//
         for(int i = 0; i < N && flag; i++){
             if(root->next[i] == NULL) continue;//边为空
-            if(q[base + i].check == 0) continue;//没有父节点
-            flag = 0;///
+            //边对应check为0时没有冲突，不更新base值
+            if(q[base + i].check == 0) continue;
+            flag = 0;//发生冲突，跳出循环更新base值
         }
         if(flag) break;
         base += 1;
