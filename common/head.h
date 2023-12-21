@@ -20,6 +20,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <dirent.h>
+#include <sys/socket.h>
 
 //自定义
 //调整宏

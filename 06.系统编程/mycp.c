@@ -25,6 +25,7 @@ int main(int argc, char *argv[]){
     char c;
     while(~(c = fgetc(fd1))) {
         fputc(c, fd2);
+     //   fclose(fd1);当前关闭文件只cp文件一个字符
     }
 
     fclose(fd1);

@@ -1,7 +1,7 @@
 /*************************************************************************
 	> File Name: mycat.c
 	> Author: 
-	> Mail: 
+	> Mail:实现文件内容打印终端 
 	> Created Time: Mon 18 Dec 2023 06:44:35 PM CST
  ************************************************************************/
 
@@ -20,7 +20,6 @@ int main(int argc, char *argv[]){
         perror("open file");
         return 1;
     }
- //   int i;
     char c;
     //fgetc,从给定输入流中读取下一个字符,返回一个字符,失败时返回EOF
     while(~(c = fgetc(fd))) {
