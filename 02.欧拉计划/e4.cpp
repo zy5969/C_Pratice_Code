@@ -4,7 +4,7 @@
 
 #include<iostream>
 using namespace std;
-
+//翻转数字并判断
 int reverse(int n) {
     int a = n, b = 0;
     while(a){
@@ -15,7 +15,7 @@ int reverse(int n) {
 }
 
 int main(){
-    int sum = 9009;
+    int sum = 1;
     //循环枚举100-999
     for(int i = 100; i < 1000; i++){
         for(int j = 100; j < 1000; j++){ 

@@ -4,7 +4,7 @@
 #include<iostream>
 #include<cmath>
 #define max 354294
-//上界值估算:10^n:n位数字的最大值;
+//上界值估算:10^(n-1):n位数字的最大值;
 //n*9^5:n位数每位的5次幂和最大值 
 using namespace std;
 //各位数的5次幂和
