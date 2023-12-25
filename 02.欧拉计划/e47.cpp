@@ -25,7 +25,7 @@ void deal_pri(){
 void count_pri(){
     for(int i = 2; i < max; i++){
         if(pri_num[i]) continue;
-        for(int j = i; j < max; j += i){
+        for(int j = i; j < max; j += i){ //倍数增长
             pri_num[j] += 1;//多次i循环可能会出现相等的j值
             //j出现的个数即质因子个数
         }

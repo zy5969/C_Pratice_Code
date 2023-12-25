@@ -25,21 +25,29 @@ int arr[max + 5];//存放每次的数字
 long long length(long long n){
     if(n == 1) return 1;
     if(n <= max && arr[n]) return arr[n];
+    //奇数和偶数判断，计算公式不同n在计算过程中可能大于一百万
     int cnt = (n % 2) ? length(3 * n + 1): length(n / 2);
     cnt++; //记录长度
-    if(n <= max) arr[n] = cnt;
+    if(n <= max) arr[n] = cnt;//记忆当前数的当前长度
     return cnt;
 }
 
 int main() {
-    int n = 0, l = 0;
+    int n = 0, l = 0, n2 = 0, l2 = 0;
     for(int i = 1; i <= max; i++){
         int d = length(i);
         if(d < l) continue;
         l = d;
         n = i;
     }
-    cout << n << " " << l << endl;
+    for(int i = 1; i <= max; i++){
+        int a = len(i);
+        if(a < l2) continue;
+        l2 = a;
+        n2 = i;
+    }
+    cout << "记忆化: " << n << " " << l << endl;
+    cout << "递归法: " << n2 << " " << l2 << endl;
     return 0;
 }
 
