@@ -13,4 +13,5 @@
 
 int socket_create(int port);
 int socket_connect(const char *ip, const int port);
+int socket_connect_timeout(const char *ip, const int port, const long timeout);
 #endif
