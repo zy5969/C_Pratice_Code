@@ -15,8 +15,9 @@ int main() {
     int val = 0;
     a[0] = a[1] = 1;
     for(int i = 1; i <= 100; i++){
-        //每一次乘积的结果存入数组
+        //每一次乘积的结果存入数组a,由1开始
         for(int j = 1; j <= a[0]; j++) a[j] *= i;
+        //处理进位
         for(int k = 1; k <= a[0]; k++){
             if(a[k] < 10) continue;
             a[k + 1] += a[k] / 10;

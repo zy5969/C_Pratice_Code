@@ -6,7 +6,6 @@
  ************************************************************************/
 
 #include "head.h"
-#include "mytcp.h"
 
 int socket_create(int port) {
     int server_listen;
@@ -19,7 +18,7 @@ int socket_create(int port) {
     server.sin_addr.s_addr = inet_addr("0.0.0.0");
     int reuse_val = 1;
     setsockopt(server_listen, SOL_SOCKET, SO_REUSEADDR, (void *)&reuse_val, sizeof(int));
-    if(bind(server_listen, (struct sockaddr_in *)&server, sizeof(server)) < 0) return -1;
+    if(bind(server_listen, (struct sockaddr *)&server, sizeof(server)) < 0) return -1;
 
     if(listen(server_listen , 20) < 0) return -1;
     return server_listen;
@@ -34,12 +33,12 @@ int socket_connect(const char *ip, const int port){
     server.sin_family = AF_INET;
     server.sin_port = htons(port);
     server.sin_addr.s_addr = inet_addr(ip);
-    if(connect(sockfd, (struct sockaddr_in *)&server, sizeof(server)) < 0) {
+    if(connect(sockfd, (struct sockaddr *)&server, sizeof(server)) < 0) {
         return -1;
     }
     return sockfd;
 }
-
+/*
 //定时发送
 int socket_connect_timeout(const char *ip, const int port, const long timeout) {
     int sockfd;
@@ -76,5 +75,5 @@ int socket_connect_timeout(const char *ip, const int port, const long timeout) {
     make_block(sockfd);
     return sockfd;
 }
-
+*/
 

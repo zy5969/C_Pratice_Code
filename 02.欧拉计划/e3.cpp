@@ -9,12 +9,14 @@ using namespace std;
 
 int main(){
     long long n = max;//转为long long
-    long num, m = 2;
+    long num, m = 2, x = 0;
     while(m * m <= n) { //最大素因子在2~根号n内
         if(n % m == 0) num = m; //num记录最大素因子
         while(n % m == 0) n /= m;
         m++;
+        x++;
     }
+    cout << m << endl;
     if(n != 1) num = n;//
     cout << num << endl;
     return 0;

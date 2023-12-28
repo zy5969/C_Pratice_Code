@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
             exit(1);
         }
         pid_t pid;
-        if((pip = fork()) < 0) {
+        if((pid = fork()) < 0) {
             perror("fork()");
             exit(1);
         }
