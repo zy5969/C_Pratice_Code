@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#define N 10000
+#define N 100000
 
 int factorcnt(long long n){
     int cnt = 0;
@@ -34,21 +34,47 @@ void brue() {
 }
 
 //线性筛取100内素数
-int arr[N + 5];
+int arr[N + 5];//素数
+int num[N + 5];//因子个数
+int cnt[N + 5];//最小因子次幂
 void prime(){
     for(int i = 2; i <= N; i++){
-        if(!arr[i]) arr[++arr[0]] = i;
+        if(!arr[i]) {
+            arr[++arr[0]] = i;
+            num[i] = 2;//因子个数最少两个
+            cnt[i] = 1;//次幂最小为1
+        }//
         for(int j = 1; j <= arr[0]; j++){
             if(arr[j] * i > N) break;
             arr[arr[j] * i] = 1;
-            if(i % arr[j] == 0) break;
+            if(i % arr[j] == 0) {
+                num[arr[j] * i] = num[i] / (cnt[i] + 1) * (cnt[i] + 2);
+                cnt[arr[j] * i] = cnt[i] + 1;
+                break;
+            } else {
+                num[arr[j] * i] = num[arr[j]] * num[i];
+                cnt[arr[j] * i] = 1;
+            }
         }
     }
     return ;
 }
 
 int main() {
-    
+    prime();
+    int n = 0;
+    while(1){
+        n++;
+        int val;//因子个数
+        //偶数
+        //奇数
+        if(n % 2) val = num[n] * num[(n + 1) / 2];
+        else val = num[n / 2] * num[n + 1];
+        if(val > 500) {
+            printf("%d %d\n", val, n * (n + 1) / 2);
+            break;
+        }
+    }
     
     //暴力解法
     brue();

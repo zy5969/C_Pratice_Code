@@ -15,10 +15,13 @@ typedef struct Node {
     struct Node *next[N];
 }Node;
 
+int nodecnt = 0;
+
 Node *getnode(){
     Node *p = (Node *)malloc(sizeof(Node));
     memset(p->next, 0, sizeof(Node *) * N);
     p->flag = 0;
+    nodecnt++;
     return p;
 }
 
@@ -43,16 +46,6 @@ void clear(Node *p){
     return ;
 }
 
-void output(Node *p, int n, char *s){
-    if(p == NULL) return ;
-    s[n] = '\0';
-    if(p->flag) printf("%s\n", s);
-    for(int i = 0; i < N; i++){
-        s[n] = i + 'a';
-        output(p->next[i], n + 1, s);
-    }
-    return ;
-}
 
 //定义双数组的结构体
 typedef struct Tree{
@@ -99,12 +92,41 @@ int doubletree(Node *root, Tree *tree, int ind){
 }
 
 //查找
-int search(Node *p, char *s){
-    return 1;
+int search(Tree *tree, char *s){
+    int p = 1;
+    for(int i = 0; s[i]; i++){
+        if(abs(tree[tree[p].base + (s[i] - 'a')].check) != p) return 0; //其父节点的check值为其本身
+        p = tree[p].base + s[i] - 'a';//求节点父节点
+    }
+    return tree[p].check < 0;
 }
 
 int main() {
-
+    int n;
+    char str[1000] = {0};
+    Node *root = getnode();
+    scanf("%d", &n);
+    for(int i = 0; i < n; i++){
+        scanf("%s", str);
+        insert(root, str);
+    }
+    Tree *arr = (Tree *)malloc(sizeof(Tree) * nodecnt * N);//定义Tree类的双数组
+    memset(arr, 0, sizeof(Tree) * nodecnt * N);
+    //最大编号
+    int cnt = doubletree(root, arr, 1);
+    //字典树的空间大小
+    int size1 = nodecnt * sizeof(Node);
+    //双数组字典树的空间大小
+    int size2 = cnt * sizeof(Tree);
+//    printf("tree space : %d bit\n", size1);
+//    printf("double tree space: %d bit\n", size2);
+//    printf("compress rate :%.2lf%%\n", 100.0 * size2 / size1);
+    printf("---------search---------\n");
+    while(~scanf("%s", str)){
+        printf("result : %d\n", search(arr, str));
+    }
+    free(arr);
+    
     return 0;
 }
 

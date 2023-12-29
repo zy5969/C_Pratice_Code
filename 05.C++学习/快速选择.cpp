@@ -23,6 +23,7 @@ int midval(int a, int b, int m){
 }
 
 //类似nth_element(first, nth, last)
+//实现获取第nth大的数
 void nth_element(int *first, int *nth, int *last){
     if(last - first == 1) return ;
     int *a = first, *b = last - 1;
