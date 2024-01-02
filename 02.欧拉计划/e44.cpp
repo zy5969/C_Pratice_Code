@@ -13,6 +13,7 @@
 
 typedef long long lint;
 
+//五边形数
 lint agonal(int n){
     return (n * (3 * n - 1) / 2);
 }
@@ -21,7 +22,7 @@ lint is_agonal(lint m, lint n){
     lint a = 1, b = n, mid;
     while(a <= b){
         mid = (a + b) / 2;
- //       lint val = agonal(mid);
+        //直接查找范围内是否有符合值
         if(agonal(mid) == m) return 1;
         if(agonal(mid) < m) a = mid + 1;
         else b = mid - 1;
@@ -31,18 +32,23 @@ lint is_agonal(lint m, lint n){
 
 int main() {
     lint sum = INT32_MAX, i = 1, j = 1;
+    //k 位置与k-1位置大于D时，有最小值
     while(agonal(j + 1) - agonal(j) < sum) {
         j += 1;
         i = j - 1;
+        //Pk - Pj >= D时可结束
         for( ; i >= 1 && agonal(j) - agonal(i) < sum; i--) {
           //  lint a = agonal(j), b = agonal(i);
             if(!is_agonal(agonal(j) + agonal(i), 2 * j)) continue;
             if(!is_agonal(agonal(j) - agonal(i), 2 * i)) continue;
-            printf("%lld---->%lld\n", agonal(j), agonal(i));
-            sum = agonal(j) - agonal(i);
+            else {
+                printf("%lld---->%lld\n", agonal(j), agonal(i));
+                sum = agonal(j) - agonal(i);
+                printf("sum = %lld\n", sum);
+                return 1;
+            }
         }
     }
-    printf("sum = %lld\n", sum);
     return 0;
 }
 
