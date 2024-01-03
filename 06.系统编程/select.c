@@ -5,10 +5,9 @@
 	> Created Time: Sun 17 Dec 2023 10:13:12 PM CST
  ************************************************************************/
 
-#include<stdio.h>
+#include "./common/head.h"
+#include "block.h"
 #include <sys/select.h>
-
-
 
 int main() {
     int age = 18;
@@ -21,12 +20,13 @@ int main() {
     
     FD_ZERO(&rfds);
     FD_SET(0, &rfds);
-    int ret;
-    if((ret = select(1, &rfds, NULL, NULL, &tv)) <= 0) {
-        fprintf(stderr, "Nothing read!\n");
+    while(1){
+    FD_SET(0, &rfds);
+        int ret = select(1, &rfds, NULL, NULL, &tv); 
+        if(ret <= 0) continue;
+        if(FD_ISSET(0, &rfds)) scanf("%d", &age);
+        printf("age = %d\n", age);
     }
-    scanf("%d", &age);
-    printf("test\n");
     return 0;
 }
 

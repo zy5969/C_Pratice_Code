@@ -6,32 +6,23 @@
  ************************************************************************/
 
 #include<iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <queue>
-#include <stack>
-#include <algorithm>
-#include <string>
-#include <map>
-#include <set>
-#include <vector>
 using namespace std;
 
 class A {
 public :
-    A() {
-        cout << this << " default constructor" << endl;
+    A() { //默认
+        cout << this << " default" << endl;
     }
-    A(const A &) {
-        cout << this << " copy constructor" << endl;
+    A(const A &) { //拷贝
+        cout << this << " 拷贝" << endl;
     }
     string s;
 };
 
 A func() {
-    A temp;
+    A temp; //引用，优化返回值
     cout << "temp = " << &temp << endl;
-    temp.s = "hello func";
+    temp.s = "func";
     return temp;
 }
 
