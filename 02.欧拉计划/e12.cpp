@@ -49,7 +49,7 @@ void prime(){
             arr[arr[j] * i] = 1;
             if(i % arr[j] == 0) {
                 num[arr[j] * i] = num[i] / (cnt[i] + 1) * (cnt[i] + 2);
-                cnt[arr[j] * i] = cnt[i] + 1;
+                cnt[arr[j] * i] = cnt[i] + 1;//
                 break;
             } else {
                 num[arr[j] * i] = num[arr[j]] * num[i];
@@ -66,10 +66,9 @@ int main() {
     while(1){
         n++;
         int val;//因子个数
-        //偶数
         //奇数
         if(n % 2) val = num[n] * num[(n + 1) / 2];
-        else val = num[n / 2] * num[n + 1];
+        else val = num[n / 2] * num[n + 1];//偶数
         if(val > 500) {
             printf("%d %d\n", val, n * (n + 1) / 2);
             break;
