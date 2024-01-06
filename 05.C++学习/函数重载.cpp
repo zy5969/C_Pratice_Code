@@ -4,7 +4,7 @@
 	> Mail: 
 	> Created Time: Thu 04 Jan 2024 09:32:30 AM CST
  ************************************************************************/
-
+//同名函数的不同实现功能
 #include<iostream>
 #include <string>
 using namespace std;
