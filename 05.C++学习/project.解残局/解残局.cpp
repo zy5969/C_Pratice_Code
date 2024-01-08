@@ -1,8 +1,5 @@
 /*************************************************************************
 	> File Name: 解残局.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: Wed 20 Dec 2023 11:14:46 AM CST
  ************************************************************************/
 #include <iostream>
 #include <algorithm>
@@ -12,12 +9,6 @@ using namespace std;
 #define max 18
 //直接列出各牌型
 string name[max + 5] = {" ", " ", " ", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A", "2", "king", "KING"};
-/*
-//牌型
-enum class P_TYPE{
-    DAN,
-};
-*/
 class Pmes {
 public :
     static vector<Pmes *> getpk(int *);

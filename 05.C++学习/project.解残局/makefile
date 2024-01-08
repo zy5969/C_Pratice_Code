@@ -1,8 +1,8 @@
-all: main.cpp src/paipk.cc 
-	g++ -std=c++11 -l ./include main.cpp ./src/paipk.cc -o bin/pai
+all: main.cpp src/paipk.cc src/tree.cc
+	g++ -std=c++11 -l ./include main.cpp src/paipk.cc src/tree.cc -o bin/pai
 
 run: all 
 	./bin/pai
 
-clear:
+clean:
 	rm bin/pai
